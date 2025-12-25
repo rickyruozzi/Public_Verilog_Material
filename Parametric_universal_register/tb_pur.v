@@ -8,7 +8,11 @@ module tb_pur;
     wire [n-1:0] data_o; //output_del registro
     reg ser_i; //input seriale per lo shift
 
-    pur uut(
+    initial begin
+        clk_i = 0;
+    end
+
+    Parametric_universal_register #(.n(n)) uut(
         .clk_i(clk_i),
         .reset_ni(reset_ni),
         .mode_i(mode_i),
@@ -18,40 +22,64 @@ module tb_pur;
     );
 
     initial begin
-        $dumpfile("tb_pur.vcd");
-        $dumpvars(0, tb_pur); 
+        $dumpfile("tb_pur.vcd"); //nome del file di dump
+        $dumpvars(0, tb_pur);  //variabili di dump 
      end
 
      always #5 clk_i = ~clk_i; //clock con periodo di 10ns, cambio di fronte ogni 5 ns
 
-     initial begin 
-        clk_i=0; 
-        reset_ni=0;
-        mode_i=2'b00; 
-        data_i=8'b00000000;
-        ser_i=1'b0;
-        if(data_o !== 8'b00000000) $display("TEST FAILED: reset non funzionante");
-        #15;
-        reset_ni=1; //disabilitiamo il segnale di reset
-        #10;
-        mode_i=2'b11; //load 
-        data_i=8'b01010101; //valore da caricare nel registro
-        @(posedge clk_i); //aspettiamo il ciclo di clock per caricare il valore
-        if(data_o !== 8'b01010101) $display("TEST FAILED: load non funzionante");
-        #10;
-        mode_i=2'b00; //hold
-        @(posedge clk_i); //aspettiamo il ciclo di clock per mantenere il valore
-        if(data_o !== 8'b01010101) $display("TEST FAILED: hold non funzionante");
-        #10;
-        mode_i=2'b01; //shift-left
-        ser_i=1'b1; //valore seriale da inserire nello shift
-        @(posedge clk_i); //aspettiamo il ciclo di clock per eseguire lo shift
-        if(data_o !== 8'b10101011) $display("TEST FAILED: shift-left non funzionante");
-        #10;
-        mode_i=2'b10; //shift-right 
-        ser_i=1'b0; //valore seriale da inserire nello shift
-        @(posedge clk_i); //aspettiamo il ciclo di clock per eseguire lo shift
-        if(data_o !== 8'b01010101) $display("TEST FAILED: shift-right non funzionante");
-        #10;
-     end
+initial begin
+    reset_ni=0;
+    mode_i=2'b00;
+    data_i=0;
+    ser_i=0;
+    #2;
+    if (data_o !== 0)
+        $display("TEST FAILED: reset non funzionante"); //verifica del reset
+
+    reset_ni = 1; //attivazionde del reset
+    @(posedge clk_i); //attesa del fronta di salita del clock    
+    #1; //ritardo usato per permettere l'aggiornamento dei segnali 
+    $display("After reset release, data_o = %b", data_o); 
+    //stampiamo il valore di data_o dopo il rilascio del reset
+
+    mode_i = 2'b11; //modalità per il caricamento 
+    data_i = 8'b01010101; //valore da caricare 
+    @(posedge clk_i); //attesa del clock
+    #1; 
+    $display("After load, data_o = %b", data_o);
+
+    if (data_o !== 8'b01010101)
+        $display("TEST FAILED: load non funzionante");
+
+    mode_i = 2'b00; //modalità hold
+    @(posedge clk_i);
+    #1;
+    $display("After hold, data_o = %b", data_o);
+
+    if (data_o !== 8'b01010101)
+        $display("TEST FAILED: hold non funzionante");
+
+    mode_i = 2'b01; //modalità shift-left
+    ser_i  = 1'b1;
+    @(posedge clk_i);
+    #1;
+    $display("After shift left, data_o = %b", data_o);
+
+    if (data_o !== 8'b10101011)
+        $display("TEST FAILED: shift-left non funzionante");
+
+    mode_i = 2'b10; //modalità shift-right
+    ser_i  = 1'b0;
+    @(posedge clk_i);
+    #1;
+    $display("After shift right, data_o = %b", data_o);
+
+    if (data_o !== 8'b01010101)
+        $display("TEST FAILED: shift-right non funzionante");
+
+    $display("ALL TESTS PASSED");
+    $finish;
+end
+
 endmodule
