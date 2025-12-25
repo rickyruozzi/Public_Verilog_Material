@@ -36,14 +36,22 @@ module tb_pur;
         #10;
         mode_i=2'b11; //load 
         data_i=8'b01010101; //valore da caricare nel registro
+        @(posedge clk_i); //aspettiamo il ciclo di clock per caricare il valore
+        if(data_o !== 8'b01010101) $display("TEST FAILED: load non funzionante");
         #10;
         mode_i=2'b00; //hold
+        @(posedge clk_i); //aspettiamo il ciclo di clock per mantenere il valore
+        if(data_o !== 8'b01010101) $display("TEST FAILED: hold non funzionante");
         #10;
         mode_i=2'b01; //shift-left
         ser_i=1'b1; //valore seriale da inserire nello shift
+        @(posedge clk_i); //aspettiamo il ciclo di clock per eseguire lo shift
+        if(data_o !== 8'b10101011) $display("TEST FAILED: shift-left non funzionante");
         #10;
         mode_i=2'b10; //shift-right 
         ser_i=1'b0; //valore seriale da inserire nello shift
+        @(posedge clk_i); //aspettiamo il ciclo di clock per eseguire lo shift
+        if(data_o !== 8'b01010101) $display("TEST FAILED: shift-right non funzionante");
         #10;
      end
 endmodule
