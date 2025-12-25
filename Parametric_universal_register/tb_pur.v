@@ -1,4 +1,4 @@
-'`timescale 1ns/1ps
+`timescale 1ns/1ps
 module tb_pur; 
     parameter n=8; //larghezza del registro
     reg clk_i; //clock signal
