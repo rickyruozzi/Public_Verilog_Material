@@ -30,11 +30,12 @@ module tb_pur;
         mode_i=2'b00; 
         data_i=8'b00000000;
         ser_i=1'b0;
+        if(data_o !== 8'b00000000) $display("TEST FAILED: reset non funzionante");
         #15;
         reset_ni=1; //disabilitiamo il segnale di reset
         #10;
         mode_i=2'b11; //load 
-        data_i=8,b 01010101; //valore da caricare nel registro
+        data_i=8'b01010101; //valore da caricare nel registro
         #10;
         mode_i=2'b00; //hold
         #10;
