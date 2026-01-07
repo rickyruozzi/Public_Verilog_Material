@@ -1,4 +1,4 @@
-module fsm_B (
+module FSM_B (
     input  clk,
     input  reset_n,
     input  enable_B,
@@ -13,7 +13,7 @@ reg[1:0] counter;
 
 always @(posedge clk) begin 
     if(!reset_n) begin 
-        next_state <= B_IDLE;
+        state <= B_IDLE;
         counter <= 2'b00;
     end
     else begin 
@@ -40,6 +40,7 @@ always @(*) begin
             next_state = B_IDLE;
         end
     end
+    endcase
 end
 
 assign done_B = (state == B_IDLE); //done_B is high in B_IDLE state

@@ -14,8 +14,8 @@ module testbench;
     always #5 clk = ~clk;
 
     initial begin 
-        dumpfile("dual_fsm.vcd");
-        dumpvars(0, testbench);
+        $dumpfile("dual_fsm.vcd");
+        $dumpvars(0, testbench);
 
         clk=0; 
         reset_n=0; 
@@ -36,6 +36,6 @@ module testbench;
         #10;
         start=0;
         #100;
-        $finish; //serve per terminare la simulazoìione
+        $finish; //serve per terminare la simulazione
     end
 endmodule

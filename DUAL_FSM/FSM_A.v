@@ -1,4 +1,4 @@
-module fsm_A (
+module FSM_A (
     input  clk,
     input  reset_n,
     input  start,
@@ -14,7 +14,7 @@ reg[1:0] state, next_state;
 reg[1:0] counter; 
 
 always @(posedge clk) begin 
-    if(!reset) begin //active low reset
+    if(!reset_n) begin //active low reset
         state <= A_IDLE;  
         counter <= 2'b00;
     end
@@ -33,10 +33,11 @@ end
 always @(*) begin 
     next_state = state; //default next state
     case (state) 
-    IDLE: begin  //wait for start signal
+    A_IDLE: begin  //wait for start signal
         if(start) begin 
             next_state = A_RUN; 
         end
+    end
     A_RUN: begin
         if(counter == 2'b10) begin  //after 2 clock cycles in A_RUN, move to A_WAIT
             next_state = A_WAIT;
@@ -47,7 +48,7 @@ always @(*) begin
             next_state = A_IDLE; 
         end
     end
-    end
+    endcase
 end
 assign enable_B = (state == A_RUN) ? 1'b1 : 1'b0; //enable_B is high in A_WAIT state
 endmodule
