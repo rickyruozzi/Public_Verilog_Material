@@ -6,9 +6,9 @@ module testbench;
     wire out;
     FSM101 uut (
         .clk(clk),
-        .reset(reset),
-        .in(in),
-        .out(out)
+        .reset(reset_in),
+        .in(in_bit),
+        .out(seq_detected)
     );
     
     always #5 clk = ~clk;

@@ -1,4 +1,4 @@
-module fsm_101 (
+module FSM101 (
     input  clk,
     input  reset_n,        // reset sincrono attivo basso
     input  in_bit,
