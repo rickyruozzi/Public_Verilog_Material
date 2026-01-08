@@ -5,8 +5,8 @@ module FSM101(
     output reg out
 )
 
-localparam s0 = 2'b00, 
-localparam S1 = 2'b01,
+localparam s0 = 2'b00; 
+localparam S1 = 2'b01;
 localparam S2 = 2'b10;
 localparam S3 = 2'b11;
 
