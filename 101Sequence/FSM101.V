@@ -1,49 +1,49 @@
-module FSM101(
-    input clk, 
-    input reset, 
-    input in,
-    output reg out
-)
+module fsm_101 (
+    input  clk,
+    input  reset_n,        // reset sincrono attivo basso
+    input  in_bit,
+    output seq_detected
+);
 
-localparam s0 = 2'b00, S1 = 2'b01, S2 = 2'b10, S3 = 2'b11;
+    parameter S0 = 2'b00,
+              S1 = 2'b01,
+              S2 = 2'b10,
+              S3 = 2'b11;
 
-reg [1:0] state, next_state;
+    reg [1:0] state, next_state;
 
-always @(posedge clk or negedge reset) begin 
-    if(!reset)
-        state <= S0; 
-    else
-        state <= next_state;
-end
-
-always @(*) begin 
-    case(state)
-    S0: begin 
-        if(in)
-            next_state = S1; 
-        else 
-            next_state
+    always @(posedge clk) begin
+        if (!reset_n)
+            state <= S0;
+        else
+            state <= next_state;
     end
-    S1: begin 
-        if(in)
-            next_state = S1;
-        else 
-            next_state = S2;
-    end
-    S2: begin 
-        if(in)
-            next_state = S3;
-        else 
-            next_state = S0;
-    end
-    S3: begin 
-        if(in)
-            next_state = S1;
-        else 
-            next_state = S2;
-    end
-end
 
-assign out = (state == S3);
+    always @(*) begin
+        next_state = state;
+        case (state)
+            S0: begin
+                if (in_bit) next_state = S1;
+                else        next_state = S0;
+            end
 
-endmodule;
+            S1: begin
+                if (in_bit) next_state = S1;
+                else        next_state = S2;
+            end
+
+            S2: begin
+                if (in_bit) next_state = S3;
+                else        next_state = S0;
+            end
+
+            S3: begin
+                if (in_bit) next_state = S1;
+                else        next_state = S2;
+            end
+        endcase
+    end
+
+    assign seq_detected = (state == S3);
+
+endmodule
