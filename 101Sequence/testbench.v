@@ -1,14 +1,14 @@
 `timescale 1ns/1ps
 module testbench;
     reg clk;
-    reg reset;
-    reg in;
-    wire out;
+    reg reset_in;
+    reg in_bit;
+    wire seq_detected;
     FSM101 uut (
         .clk(clk),
-        .reset(reset_in),
-        .in(in_bit),
-        .out(seq_detected)
+        .reset_in(reset_in),
+        .in_bit(in_bit),
+        .seq_detected(seq_detected)
     );
     
     always #5 clk = ~clk;
