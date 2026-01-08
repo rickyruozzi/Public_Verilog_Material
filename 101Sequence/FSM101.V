@@ -5,10 +5,7 @@ module FSM101(
     output reg out
 )
 
-localparam s0 = 2'b00; 
-localparam S1 = 2'b01;
-localparam S2 = 2'b10;
-localparam S3 = 2'b11;
+localparam s0 = 2'b00, S1 = 2'b01, S2 = 2'b10, S3 = 2'b11;
 
 reg [1:0] state, next_state;
 
