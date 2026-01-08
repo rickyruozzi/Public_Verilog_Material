@@ -1,0 +1,118 @@
+$date
+	Thu Jan 08 09:41:59 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module testbench $end
+$var wire 1 ! seq_detected $end
+$var reg 1 " clk $end
+$var reg 1 # in_bit $end
+$var reg 1 $ reset_in $end
+$scope module uut $end
+$var wire 1 " clk $end
+$var wire 1 # in_bit $end
+$var wire 1 $ reset_in $end
+$var wire 1 ! seq_detected $end
+$var reg 2 % next_state [1:0] $end
+$var reg 2 & state [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx &
+bx %
+0$
+0#
+0"
+x!
+$end
+#5000
+b0 %
+0!
+b0 &
+1"
+#10000
+0"
+1$
+#15000
+1"
+#20000
+b1 %
+0"
+1#
+#25000
+b1 &
+1"
+#30000
+b10 %
+0"
+0#
+#35000
+b0 %
+b10 &
+1"
+#40000
+b11 %
+0"
+1#
+#45000
+b1 %
+1!
+b11 &
+1"
+#50000
+0"
+#55000
+0!
+b1 &
+1"
+#60000
+0"
+#65000
+1"
+#70000
+b10 %
+0"
+0#
+#75000
+b0 %
+b10 &
+1"
+#80000
+0"
+#85000
+b0 &
+1"
+#90000
+b1 %
+0"
+1#
+#95000
+b1 &
+1"
+#100000
+b10 %
+0"
+0#
+#105000
+b0 %
+b10 &
+1"
+#110000
+b11 %
+0"
+1#
+#115000
+b1 %
+1!
+b11 &
+1"
+#120000
+b10 %
+0"
+0#
