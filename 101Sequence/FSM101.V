@@ -1,6 +1,6 @@
 module FSM101 (
     input  clk,
-    input  reset_n,        // reset sincrono attivo basso
+    input  reset_in,        // reset sincrono attivo basso
     input  in_bit,
     output seq_detected
 );
