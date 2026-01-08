@@ -13,7 +13,7 @@ module FSM101 (
     reg [1:0] state, next_state;
 
     always @(posedge clk) begin
-        if (!reset_n)
+        if (!reset_in)
             state <= S0;
         else
             state <= next_state;
