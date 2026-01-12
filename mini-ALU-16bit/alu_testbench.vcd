@@ -1,0 +1,100 @@
+$date
+	Mon Jan 12 16:54:38 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module ALUtestbench $end
+$var wire 16 ! res_o [15:0] $end
+$var reg 16 " a_i [15:0] $end
+$var reg 16 # b_i [15:0] $end
+$var reg 4 $ op_i [3:0] $end
+$var reg 4 % shamt_i [3:0] $end
+$scope module uut $end
+$var wire 16 & a_i [15:0] $end
+$var wire 16 ' b_i [15:0] $end
+$var wire 4 ( op_i [3:0] $end
+$var wire 4 ) shamt_i [3:0] $end
+$var reg 16 * res_o [15:0] $end
+$var reg 1 + sign $end
+$var reg 16 , temp [15:0] $end
+$var reg 1 - zero_o $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0-
+bx ,
+x+
+b1000 *
+b0 )
+b0 (
+b11 '
+b101 &
+b0 %
+b0 $
+b11 #
+b101 "
+b1000 !
+$end
+#11
+b10 !
+b10 *
+b1 $
+b1 (
+#22
+b1111 !
+b1111 *
+b10 $
+b10 (
+b111100001111 #
+b111100001111 '
+b11111111 "
+b11111111 &
+#33
+b111111111111 !
+b111111111111 *
+b11 $
+b11 (
+#45
+b111111110000 !
+b111111110000 *
+b100 $
+b100 (
+#55
+b1111111100000000 !
+b1111111100000000 *
+b101 $
+b101 (
+b0 #
+b0 '
+#66
+b1000 !
+b1000 *
+b1000 ,
+b11 %
+b11 )
+b110 $
+b110 (
+b1 "
+b1 &
+#77
+b1000000000000 !
+b1000000000000 *
+b1000000000000 ,
+b111 $
+b111 (
+b1000000000000000 "
+b1000000000000000 &
+#88
+b1111000000000000 !
+b1111000000000000 *
+1+
+b1111000000000000 ,
+b1000 $
+b1000 (
+#99
