@@ -36,18 +36,17 @@ always @(*) begin
     IDLE : begin 
         if(call > floor) begin 
             next_state = MOVING_UP;
-        end
-        if(call < floor) begin 
+        end 
+        else if(call < floor) begin 
             next_state = MOVING_DOWN;
         end
         else begin 
             next_state = DOOR_OPEN; 
         end
     end
-    MOVING_UP : Begin 
+    MOVING_UP : begin 
         if(floor == call) begin 
             next_state = DOOR_OPEN; 
-        else
     end
     MOVING_DOWN : begin 
         if(floor == call) begin 
@@ -58,8 +57,7 @@ always @(*) begin
         if( timer == D_O_TIME) begin 
             next_state = IDLE; 
             next_timer = 0; 
-        end
-        begin 
+        end else begin 
             next_timer = timer + 1; 
         end
     end
