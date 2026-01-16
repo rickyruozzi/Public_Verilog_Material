@@ -34,6 +34,7 @@ always @(*) begin
     next_timer = timer; 
     case(state) 
     IDLE : begin 
+        next_timer = 0;
         if(call > floor) begin 
             next_state = MOVING_UP;
         end 
@@ -47,6 +48,7 @@ always @(*) begin
     MOVING_UP : begin 
         if(floor == call) begin 
             next_state = DOOR_OPEN; 
+    end
     end
     MOVING_DOWN : begin 
         if(floor == call) begin 
@@ -69,11 +71,11 @@ always @(*) begin
     motor_down = 0;
     door_open = 0; 
 
-    case(state) begin 
+    case(state)  
         MOVING_UP : motor_up = 1; 
         MOVING_DOWN : motor_down = 1; 
         DOOR_OPEN : door_open = 1;
-    end
+    endcase
 end
 
 endmodule
